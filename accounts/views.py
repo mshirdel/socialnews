@@ -36,6 +36,10 @@ class LoginUser(APIView):
 
 
 class UpdateUser(generics.RetrieveUpdateAPIView):
+    """
+    Retrieve current user info with updateing its data
+    """
+
     permission_classes = [IsAuthenticated]
     serializer_class = auth_serializer.UserSerializer
 
@@ -52,9 +56,12 @@ class UpdateUser(generics.RetrieveUpdateAPIView):
 
 
 class UserInfo(generics.RetrieveAPIView):
-    permission_classes = [IsAuthenticated]
+    """
+    Show general info of users
+    """
+
+    permission_classes = [AllowAny]
     serializer_class = auth_serializer.UserSerializer
-    # queryset = User.objects.all()
 
     def get_queryset(self):
         return User.objects.filter(is_active=True)
